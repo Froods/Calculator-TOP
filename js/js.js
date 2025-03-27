@@ -1,3 +1,7 @@
+/// Constants
+
+const MAX_LENGTH = 11;
+
 //// Variables
 
 // Operation variables
@@ -98,17 +102,21 @@ let getOperator = function(displayContent, chosenOperator) {
 
 // Event listeners for digits
 for (let i = 0; i < digits.length; i++) {
-    let curDigit = digits[i];
-    curDigit.element.addEventListener("click", () => {
-        if (display.textContent === "0" || newOperand === true || evaluated === true) {
-            display.textContent = "";
-            display.textContent += curDigit.digit;
-            newOperand = false;
-            evaluated = false;
-        } else {
-            display.textContent += curDigit.digit;
-        }
-    });
+
+        let curDigit = digits[i];
+
+        curDigit.element.addEventListener("click", () => {
+
+                if (display.textContent === "0" || newOperand === true || evaluated === true) {
+                    display.textContent = "";
+                    display.textContent += curDigit.digit;
+                    newOperand = false;
+                    evaluated = false;
+                } else if (display.textContent.length < MAX_LENGTH) {
+                    display.textContent += curDigit.digit;
+                }
+
+        });
 }
 
 // Event listeners for operators
