@@ -1,8 +1,8 @@
-/// Constants
+// Constants
 
 const MAX_LENGTH = 11;
 
-//// Variables
+///// Variables
 
 // Operation variables
 let operandA;
@@ -14,7 +14,7 @@ let operatorPicked = false;
 let newOperand = false;
 let evaluated = false;
 
-// Element variables
+//// Element variables
 let display = document.querySelector("#output");
 
 /// Buttons
@@ -64,23 +64,71 @@ let divide = function(a ,b) {
 // Operate
 let operate = function(a, b, operator) {
     if (operator === "+") {
-        display.textContent = add(a, b);
+
+        let result = add(a, b).toString();
+
+        if (result.length > MAX_LENGTH) {
+            if (Number(result) > 99999999999) {
+                result = "99999999999";
+            } else {
+                result = result.slice(0, MAX_LENGTH);
+            }
+        }
+
+        display.textContent = result;
         operandA = display.textContent;
+
     }
 
     if (operator === "-") {
-        display.textContent = subtract(a, b);
+
+        let result = subtract(a, b).toString();
+
+        if (result.length > MAX_LENGTH) {
+            if (Number(result) > 99999999999) {
+                result = "99999999999";
+            } else {
+                result = result.slice(0, MAX_LENGTH);
+            }
+        }
+
+        display.textContent = result;
         operandA = display.textContent;
+
     }
 
     if (operator === "*") {
-        display.textContent = multiply(a, b);
+
+        let result = multiply(a, b).toString();
+
+        if (result.length > MAX_LENGTH) {
+            if (Number(result) > 99999999999) {
+                result = "99999999999";
+            } else {
+                result = result.slice(0, MAX_LENGTH);
+            }
+        }
+
+        display.textContent = result;
         operandA = display.textContent;
+
     }
 
     if (operator === "/") {
-        display.textContent = divide(a, b);
+
+        let result = divide(a, b).toString();
+
+        if (result.length > MAX_LENGTH) {
+            if (Number(result) > 99999999999) {
+                result = "99999999999";
+            } else {
+                result = result.slice(0, MAX_LENGTH);
+            }
+        }
+
+        display.textContent = result;
         operandA = display.textContent;
+
     }
 }
 
