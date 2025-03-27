@@ -2,8 +2,10 @@
 
 // Operation variables
 let operandA;
-let operandB;
+let operandB = "unchanged";
 let operator;
+let operatorPicked = false;
+let newOperand = false;
 
 // Element variables
 let display = document.querySelector("#output");
@@ -22,50 +24,86 @@ let digits = [
     {"element": document.querySelector("#b9"),"digit": 9},
 ];
 
+// Array of operator button objects
+let operators = [
+    {"element": document.querySelector("#bPlus"),"operator": "+"},
+    {"element": document.querySelector("#bMinus"),"operator": "-"},
+    {"element": document.querySelector("#bTimes"),"operator": "*"},
+    {"element": document.querySelector("#bDividedBy"),"operator": "/"},
+];
+
 /// Operator functions
 let add = function(a ,b) {
-    return a + b;
+    return Number(a) + Number(b);
 }
 
 let subtract = function(a ,b) {
-    return a - b;
+    return Number(a) - Number(b);
 }
 
 let multiply = function(a ,b) {
-    return a * b;
+    return Number(a) * Number(b);
 }
 
 let divide = function(a ,b) {
-    return a / b;
+    return Number(a) / Number(b);
 }
 
 /// Operate function
 let operate = function(a, b, operator) {
-    if (operator = "+") {
-        return add(a, b);
+    if (operator === "+") {
+        display.textContent = add(a, b);
+        operandA = display.textContent;
     }
 
-    if (operator = "-") {
-        return subtract(a, b);
+    if (operator === "-") {
+        display.textContent = subtract(a, b);
+        operandA = display.textContent;
     }
 
-    if (operator = "*") {
-        return multiply(a, b);
+    if (operator === "*") {
+        display.textContent = multiply(a, b);
+        operandA = display.textContent;
     }
 
-    if (operator = "/") {
-        return divide(a, b);
+    if (operator === "/") {
+        display.textContent = divide(a, b);
+        operandA = display.textContent;
     }
 }
 
-/// Add event listeners for all digits
+let getOperator = function(displayContent, chosenOperator) {
+    if (operatorPicked === true) {
+        operandB = displayContent;
+        operate(operandA, operandB, operator);
+        operator = chosenOperator;
+    } else {
+        operatorPicked = true;
+        operandA = displayContent;
+        operator = chosenOperator;
+    }
+    newOperand = true
+}
+
+/// Add event listeners for digits
 for (let i = 0; i < digits.length; i++) {
     let curDigit = digits[i];
     curDigit.element.addEventListener("click", () => {
-        if (display.textContent === "0") {
+        if (display.textContent === "0" || newOperand === true) {
             display.textContent = "";
-        }  
-        display.textContent += curDigit.digit;
+            display.textContent += curDigit.digit;
+            newOperand = false;
+        } else {
+            display.textContent += curDigit.digit;
+        }
+    });
+}
+
+/// Add event listeners for operators
+for (let i = 0; i < operators.length; i++) {
+    let curOperator = operators[i];
+    curOperator.element.addEventListener("click", () => {
+        getOperator(display.textContent,curOperator.operator)
     });
 }
 
