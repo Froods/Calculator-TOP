@@ -2,13 +2,19 @@
 
 // Operation variables
 let operandA;
-let operandB = "unchanged";
+let operandB;
 let operator;
+
+// Boolean variables
 let operatorPicked = false;
 let newOperand = false;
+let evaluated = false;
 
 // Element variables
 let display = document.querySelector("#output");
+
+/// Buttons
+let bEquals = document.querySelector("#bEquals")
 
 // Array of digit button objects
 let digits = [
@@ -49,7 +55,9 @@ let divide = function(a ,b) {
     return Number(a) / Number(b);
 }
 
-/// Operate function
+/// Functions
+
+// Operate
 let operate = function(a, b, operator) {
     if (operator === "+") {
         display.textContent = add(a, b);
@@ -72,6 +80,7 @@ let operate = function(a, b, operator) {
     }
 }
 
+// Get operator
 let getOperator = function(displayContent, chosenOperator) {
     if (operatorPicked === true) {
         operandB = displayContent;
@@ -85,21 +94,24 @@ let getOperator = function(displayContent, chosenOperator) {
     newOperand = true
 }
 
-/// Add event listeners for digits
+/// Event listeners
+
+// Event listeners for digits
 for (let i = 0; i < digits.length; i++) {
     let curDigit = digits[i];
     curDigit.element.addEventListener("click", () => {
-        if (display.textContent === "0" || newOperand === true) {
+        if (display.textContent === "0" || newOperand === true || evaluated === true) {
             display.textContent = "";
             display.textContent += curDigit.digit;
             newOperand = false;
+            evaluated = false;
         } else {
             display.textContent += curDigit.digit;
         }
     });
 }
 
-/// Add event listeners for operators
+// Event listeners for operators
 for (let i = 0; i < operators.length; i++) {
     let curOperator = operators[i];
     curOperator.element.addEventListener("click", () => {
@@ -107,3 +119,13 @@ for (let i = 0; i < operators.length; i++) {
     });
 }
 
+// Event listener for "="
+
+bEquals.addEventListener("click", () => {
+    if (operatorPicked === true) {
+        operandB = display.textContent;
+        operate(operandA, operandB, operator)
+        operatorPicked = false;
+        evaluated = true;
+    }
+});
