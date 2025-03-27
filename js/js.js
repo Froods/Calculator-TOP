@@ -58,6 +58,14 @@ let multiply = function(a ,b) {
 }
 
 let divide = function(a ,b) {
+    if (Number(a) === 0 || Number(b) === 0) { // THE ROCK
+        display.remove();
+        let img = document.createElement("img");
+        img.src = "./images/rock.gif";
+        document.getElementById("outputSection").appendChild(img);
+        img.style.paddingLeft = "80px";
+    }
+
     return Number(a) / Number(b);
 }
 
