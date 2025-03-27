@@ -19,6 +19,7 @@ let display = document.querySelector("#output");
 
 /// Buttons
 let bEquals = document.querySelector("#bEquals")
+let bClear = document.querySelector("#bAC")
 
 // Array of digit button objects
 let digits = [
@@ -32,6 +33,7 @@ let digits = [
     {"element": document.querySelector("#b7"),"digit": 7},
     {"element": document.querySelector("#b8"),"digit": 8},
     {"element": document.querySelector("#b9"),"digit": 9},
+    {"element": document.querySelector("#bDot"),"digit": "."},
 ];
 
 // Array of operator button objects
@@ -155,7 +157,7 @@ for (let i = 0; i < digits.length; i++) {
 
         curDigit.element.addEventListener("click", () => {
 
-                if (display.textContent === "0" || newOperand === true || evaluated === true) {
+                if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
                     display.textContent = "";
                     display.textContent += curDigit.digit;
                     newOperand = false;
@@ -176,7 +178,6 @@ for (let i = 0; i < operators.length; i++) {
 }
 
 // Event listener for "="
-
 bEquals.addEventListener("click", () => {
     if (operatorPicked === true) {
         operandB = display.textContent;
@@ -184,4 +185,15 @@ bEquals.addEventListener("click", () => {
         operatorPicked = false;
         evaluated = true;
     }
+});
+
+// Event listener for clear
+bClear.addEventListener("click", () => {
+    operandA = "";
+    operandB = "";
+    operator = "";
+    operatorPicked = false;
+    newOperand = false;
+    evaluated = false;
+    display.textContent = "0";
 });
