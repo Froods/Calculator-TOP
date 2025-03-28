@@ -11,8 +11,10 @@ let operator;
 
 // Boolean variables
 let operatorPicked = false;
+let digitPicked = false;
 let newOperand = false;
 let evaluated = false;
+
 
 //// Element variables
 let display = document.querySelector("#output");
@@ -144,16 +146,16 @@ let operate = function(a, b, operator) {
 
 // Get operator
 let getOperator = function(displayContent, chosenOperator) {
-    if (operatorPicked === true) {
+    if (operatorPicked === true && digitPicked === true) {
         operandB = displayContent;
         operate(operandA, operandB, operator);
-        operator = chosenOperator;
     } else {
         operatorPicked = true;
         operandA = displayContent;
-        operator = chosenOperator;
     }
     newOperand = true
+    digitPicked = false;
+    operator = chosenOperator;
 }
 
 /// Event listeners
@@ -161,20 +163,25 @@ let getOperator = function(displayContent, chosenOperator) {
 // Event listeners for digits
 for (let i = 0; i < digits.length; i++) {
 
-        let curDigit = digits[i];
+    let curDigit = digits[i];
 
-        curDigit.element.addEventListener("click", () => {
+    curDigit.element.addEventListener("click", () => {
 
-                if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
-                    display.textContent = "";
-                    display.textContent += curDigit.digit;
-                    newOperand = false;
-                    evaluated = false;
-                } else if (display.textContent.length < MAX_LENGTH) {
-                    display.textContent += curDigit.digit;
-                }
+        if (curDigit.digit === "." && display.textContent.indexOf(".") !== -1) {
 
-        });
+        } else {
+            if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
+                display.textContent = "";
+                display.textContent += curDigit.digit;
+                newOperand = false;
+                evaluated = false;
+            } else if (display.textContent.length < MAX_LENGTH) {
+                display.textContent += curDigit.digit;
+            }
+            digitPicked = true;
+        }
+
+    });
 }
 
 // Event listeners for operators
@@ -201,6 +208,7 @@ bClear.addEventListener("click", () => {
     operandB = "";
     operator = "";
     operatorPicked = false;
+    digitPicked = false;
     newOperand = false;
     evaluated = false;
     display.textContent = "0";
