@@ -23,6 +23,7 @@ html, body {
 
 #outputSection {
     width: auto;
+    height: 60px;
     flex: 1 0 auto;
     margin: 20px 20px 0 20px;
     background: linear-gradient(155deg, rgb(105, 105, 105), rgb(83, 83, 83));
@@ -31,6 +32,9 @@ html, body {
     border-width: 2px;
     border-style: solid;
     border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #inputSection {
@@ -111,4 +115,14 @@ button.active {
     font-size: 54px;
     font-weight: 800;
     font-family: 'roboto';
+    transition: transform 0.1s ease, background-image 0.5s ease;
+}
+
+#output.changed {
+    background-image: linear-gradient(135deg, rgb(180, 62, 216), rgb(184, 24, 216));
+    -webkit-background-clip: text;
+    background-clip: text;         
+    color: transparent;
+    opacity: 1;
+    transform: scale(0.70);
 }

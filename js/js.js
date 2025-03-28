@@ -95,6 +95,11 @@ let operate = function(a, b, operator) {
         display.textContent = result;
         operandA = display.textContent;
 
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 200);
+        display.classList.toggle("changed");
+
     }
 
     if (operator === "-") {
@@ -113,6 +118,11 @@ let operate = function(a, b, operator) {
 
         display.textContent = result;
         operandA = display.textContent;
+
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 200);
+        display.classList.toggle("changed");
 
     }
 
@@ -133,6 +143,11 @@ let operate = function(a, b, operator) {
         display.textContent = result;
         operandA = display.textContent;
 
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 200);
+        display.classList.toggle("changed");
+
     }
 
     if (operator === "/") {
@@ -151,6 +166,11 @@ let operate = function(a, b, operator) {
 
         display.textContent = result;
         operandA = display.textContent;
+
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 200);
+        display.classList.toggle("changed");
 
     }
 }
@@ -194,10 +214,21 @@ for (let i = 0; i < digits.length; i++) {
             if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
                 display.textContent = "";
                 display.textContent += curDigit.digit;
+
+                setTimeout(() => {
+                    display.classList.toggle("changed");
+                }, 100);
+                display.classList.toggle("changed");
+
                 newOperand = false;
                 evaluated = false;
             } else if (display.textContent.length < MAX_LENGTH) {
                 display.textContent += curDigit.digit;
+
+                setTimeout(() => {
+                    display.classList.toggle("changed");
+                }, 100);
+                display.classList.toggle("changed");
             }
             digitPicked = true;
         }
@@ -213,10 +244,21 @@ for (let i = 0; i < digits.length; i++) {
             if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
                 display.textContent = "";
                 display.textContent += curDigit.digit;
+
+                setTimeout(() => {
+                    display.classList.toggle("changed");
+                }, 100);
+                display.classList.toggle("changed");
+
                 newOperand = false;
                 evaluated = false;
             } else if (display.textContent.length < MAX_LENGTH) {
                 display.textContent += curDigit.digit;
+
+                setTimeout(() => {
+                    display.classList.toggle("changed");
+                }, 100);
+                display.classList.toggle("changed");
             }
             digitPicked = true;
         }
@@ -292,8 +334,16 @@ document.addEventListener("keydown", (event) => {
 
         if (display.textContent.length > 1) {
             display.textContent = display.textContent.slice(0,display.textContent.length-1);
+            setTimeout(() => {
+                display.classList.toggle("changed");
+            }, 100);
+            display.classList.toggle("changed");
         } else {
             display.textContent = "0";
+            setTimeout(() => {
+                display.classList.toggle("changed");
+            }, 100);
+            display.classList.toggle("changed");
         }
     }
 });
@@ -301,14 +351,26 @@ document.addEventListener("keydown", (event) => {
 bBackspace.addEventListener("click", () => {
     if (display.textContent.length > 1) {
         display.textContent = display.textContent.slice(0,display.textContent.length-1);
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 100);
+        display.classList.toggle("changed");
     } else {
         display.textContent = "0";
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 100);
+        display.classList.toggle("changed");
     }
 });
 
 // Event listener for "+/-"
 bPlusMinus.addEventListener("click", () => {
     display.textContent = Number(display.textContent) - Number(display.textContent)*2
+    setTimeout(() => {
+        display.classList.toggle("changed");
+    }, 100);
+    display.classList.toggle("changed");
 });
 
 // Event listener for "%"
@@ -322,6 +384,10 @@ bPercent.addEventListener("click", () => {
         percentage = percentage.slice(0, MAX_LENGTH);
     }
     display.textContent = percentage;
+    setTimeout(() => {
+        display.classList.toggle("changed");
+    }, 100);
+    display.classList.toggle("changed");
 });
 
 // Event listener for clear
@@ -344,6 +410,10 @@ document.addEventListener("keydown", (event) => {
         newOperand = false;
         evaluated = false;
         display.textContent = "0";
+        setTimeout(() => {
+            display.classList.toggle("changed");
+        }, 100);
+        display.classList.toggle("changed");
     }
 
 });
@@ -357,4 +427,8 @@ bClear.addEventListener("click", () => {
     newOperand = false;
     evaluated = false;
     display.textContent = "0";
+    setTimeout(() => {
+        display.classList.toggle("changed");
+    }, 100);
+    display.classList.toggle("changed");
 });
