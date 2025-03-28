@@ -175,6 +175,28 @@ let getOperator = function(displayContent, chosenOperator) {
 for (let i = 0; i < digits.length; i++) {
 
     let curDigit = digits[i];
+    let key = digits[i].digit.toString();
+
+    document.addEventListener("keypress", (event) => {
+
+        if (event.key === key) {
+
+        if (curDigit.digit === "." && display.textContent.indexOf(".") !== -1) {
+
+        } else {
+            if (display.textContent === "0" && curDigit.digit !== "." || newOperand === true || evaluated === true) {
+                display.textContent = "";
+                display.textContent += curDigit.digit;
+                newOperand = false;
+                evaluated = false;
+            } else if (display.textContent.length < MAX_LENGTH) {
+                display.textContent += curDigit.digit;
+            }
+            digitPicked = true;
+        }
+
+        }
+    });
 
     curDigit.element.addEventListener("click", () => {
 
@@ -197,10 +219,12 @@ for (let i = 0; i < digits.length; i++) {
 
 // Event listeners for operators
 for (let i = 0; i < operators.length; i++) {
+    
     let curOperator = operators[i];
     curOperator.element.addEventListener("click", () => {
         getOperator(display.textContent,curOperator.operator)
     });
+
 }
 
 // Event listener for "="
