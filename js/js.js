@@ -180,6 +180,13 @@ for (let i = 0; i < digits.length; i++) {
     document.addEventListener("keypress", (event) => {
 
         if (event.key === key) {
+        
+        setTimeout(() => {
+            curDigit.element.classList.toggle("active");
+            curDigit.element.classList.toggle("hover");
+        }, 90);
+        curDigit.element.classList.toggle("active");
+        curDigit.element.classList.toggle("hover");
 
         if (curDigit.digit === "." && display.textContent.indexOf(".") !== -1) {
 
@@ -225,6 +232,14 @@ for (let i = 0; i < operators.length; i++) {
 
     document.addEventListener("keypress", (event) => {
         if (event.key === key) {
+
+            setTimeout(() => {
+                curOperator.element.classList.toggle("active");
+                curOperator.element.classList.toggle("hover");
+            }, 90);
+            curOperator.element.classList.toggle("active");
+            curOperator.element.classList.toggle("hover");
+
             getOperator(display.textContent,curOperator.operator)
         }
     });
@@ -238,6 +253,14 @@ for (let i = 0; i < operators.length; i++) {
 // Event listener for "="
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
+
+        setTimeout(() => {
+            bEquals.classList.toggle("active");
+            bEquals.classList.toggle("hover");
+        }, 90);
+        bEquals.classList.toggle("active");
+        bEquals.classList.toggle("hover");
+        
         if (operatorPicked === true) {
             operandB = display.textContent;
             operate(operandA, operandB, operator)
@@ -259,6 +282,14 @@ bEquals.addEventListener("click", () => {
 // Event listener for backspace
 document.addEventListener("keydown", (event) => {
     if (event.key === "Backspace") {
+
+        setTimeout(() => {
+            bBackspace.classList.toggle("active");
+            bBackspace.classList.toggle("hover");
+        }, 90);
+        bBackspace.classList.toggle("active");
+        bBackspace.classList.toggle("hover");
+
         if (display.textContent.length > 1) {
             display.textContent = display.textContent.slice(0,display.textContent.length-1);
         } else {
@@ -297,6 +328,14 @@ bPercent.addEventListener("click", () => {
 document.addEventListener("keydown", (event) => {
 
     if (event.key === "Escape") {
+
+        setTimeout(() => {
+            bClear.classList.toggle("active");
+            bClear.classList.toggle("hover");
+        }, 90);
+        bClear.classList.toggle("active");
+        bClear.classList.toggle("hover");
+
         operandA = "";
         operandB = "";
         operator = "";
