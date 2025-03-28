@@ -219,8 +219,16 @@ for (let i = 0; i < digits.length; i++) {
 
 // Event listeners for operators
 for (let i = 0; i < operators.length; i++) {
-    
+
     let curOperator = operators[i];
+    let key = operators[i].operator;
+
+    document.addEventListener("keypress", (event) => {
+        if (event.key === key) {
+            getOperator(display.textContent,curOperator.operator)
+        }
+    });
+
     curOperator.element.addEventListener("click", () => {
         getOperator(display.textContent,curOperator.operator)
     });
@@ -228,6 +236,17 @@ for (let i = 0; i < operators.length; i++) {
 }
 
 // Event listener for "="
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        if (operatorPicked === true) {
+            operandB = display.textContent;
+            operate(operandA, operandB, operator)
+            operatorPicked = false;
+            evaluated = true;
+        }
+    }
+});
+
 bEquals.addEventListener("click", () => {
     if (operatorPicked === true) {
         operandB = display.textContent;
@@ -238,6 +257,16 @@ bEquals.addEventListener("click", () => {
 });
 
 // Event listener for backspace
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Backspace") {
+        if (display.textContent.length > 1) {
+            display.textContent = display.textContent.slice(0,display.textContent.length-1);
+        } else {
+            display.textContent = "0";
+        }
+    }
+});
+
 bBackspace.addEventListener("click", () => {
     if (display.textContent.length > 1) {
         display.textContent = display.textContent.slice(0,display.textContent.length-1);
@@ -265,6 +294,21 @@ bPercent.addEventListener("click", () => {
 });
 
 // Event listener for clear
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+        operandA = "";
+        operandB = "";
+        operator = "";
+        operatorPicked = false;
+        digitPicked = false;
+        newOperand = false;
+        evaluated = false;
+        display.textContent = "0";
+    }
+
+});
+
 bClear.addEventListener("click", () => {
     operandA = "";
     operandB = "";
