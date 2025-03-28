@@ -1,6 +1,6 @@
 // Constants
 
-const MAX_LENGTH = 11;
+const MAX_LENGTH = 10;
 
 ///// Variables
 
@@ -20,9 +20,11 @@ let evaluated = false;
 let display = document.querySelector("#output");
 
 /// Buttons
-let bEquals = document.querySelector("#bEquals")
-let bClear = document.querySelector("#bAC")
-let bBackspace = document.querySelector("#bBackspace")
+let bEquals = document.querySelector("#bEquals");
+let bClear = document.querySelector("#bAC");
+let bBackspace = document.querySelector("#bBackspace");
+let bPlusMinus = document.querySelector("#bPlusMinus");
+let bPercent = document.querySelector("#bPercent");
 
 // Array of digit button objects
 let digits = [
@@ -81,8 +83,10 @@ let operate = function(a, b, operator) {
         let result = add(a, b).toString();
 
         if (result.length > MAX_LENGTH) {
-            if (Number(result) > 99999999999) {
-                result = "99999999999";
+            if (Number(result) > 9999999999) {
+                result = "9999999999";
+            } else if (Number(result) < -9999999999) {
+                result = "-9999999999";
             } else {
                 result = result.slice(0, MAX_LENGTH);
             }
@@ -98,8 +102,10 @@ let operate = function(a, b, operator) {
         let result = subtract(a, b).toString();
 
         if (result.length > MAX_LENGTH) {
-            if (Number(result) > 99999999999) {
-                result = "99999999999";
+            if (Number(result) > 9999999999) {
+                result = "9999999999";
+            } else if (Number(result) < -9999999999) {
+                result = "-9999999999";
             } else {
                 result = result.slice(0, MAX_LENGTH);
             }
@@ -115,8 +121,10 @@ let operate = function(a, b, operator) {
         let result = multiply(a, b).toString();
 
         if (result.length > MAX_LENGTH) {
-            if (Number(result) > 99999999999) {
-                result = "99999999999";
+            if (Number(result) > 9999999999) {
+                result = "9999999999";
+            } else if (Number(result) < -9999999999) {
+                result = "-9999999999";
             } else {
                 result = result.slice(0, MAX_LENGTH);
             }
@@ -132,8 +140,10 @@ let operate = function(a, b, operator) {
         let result = divide(a, b).toString();
 
         if (result.length > MAX_LENGTH) {
-            if (Number(result) > 99999999999) {
-                result = "99999999999";
+            if (Number(result) > 9999999999) {
+                result = "9999999999";
+            } else if (Number(result) < -9999999999) {
+                result = "-9999999999";
             } else {
                 result = result.slice(0, MAX_LENGTH);
             }
@@ -210,6 +220,24 @@ bBackspace.addEventListener("click", () => {
     } else {
         display.textContent = "0";
     }
+});
+
+// Event listener for "+/-"
+bPlusMinus.addEventListener("click", () => {
+    display.textContent = Number(display.textContent) - Number(display.textContent)*2
+});
+
+// Event listener for "%"
+bPercent.addEventListener("click", () => {
+    let percentage = Number(display.textContent) / 100;
+    percentage = percentage.toString();
+    if (percentage.indexOf("-") !== -1 && percentage.length > MAX_LENGTH+1) {
+        percentage = percentage.slice(0, MAX_LENGTH+1);
+    }
+    if (percentage.indexOf("-") === -1 && percentage.length > MAX_LENGTH) {
+        percentage = percentage.slice(0, MAX_LENGTH);
+    }
+    display.textContent = percentage;
 });
 
 // Event listener for clear
