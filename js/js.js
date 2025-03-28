@@ -22,6 +22,7 @@ let display = document.querySelector("#output");
 /// Buttons
 let bEquals = document.querySelector("#bEquals")
 let bClear = document.querySelector("#bAC")
+let bBackspace = document.querySelector("#bBackspace")
 
 // Array of digit button objects
 let digits = [
@@ -199,6 +200,15 @@ bEquals.addEventListener("click", () => {
         operate(operandA, operandB, operator)
         operatorPicked = false;
         evaluated = true;
+    }
+});
+
+// Event listener for backspace
+bBackspace.addEventListener("click", () => {
+    if (display.textContent.length > 1) {
+        display.textContent = display.textContent.slice(0,display.textContent.length-1);
+    } else {
+        display.textContent = "0";
     }
 });
 
